@@ -1,5 +1,6 @@
 # www.timeanddate.com/weather/india/
-import urllib.request
+import urllib
+from urllib import request
 from bs4 import BeautifulSoup
 
 
@@ -17,7 +18,7 @@ def weather(city):
     degree = temp.split(" ")[0].encode('ascii', 'ignore').decode()
     msg = degree + " - " + cond
     return msg
-def main():
-    read city
-    msg=weather(city)
-    echo (msg)
+
+city=input()
+msg=weather(city)
+print(msg)
