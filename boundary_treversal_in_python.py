@@ -18,8 +18,8 @@ class BST(object):
                 print("i=",i,n)
                 temp = node(arr[i])
                 root = temp
-                root.left = self._insertL(arr, root.left,self.co,n)
-                root.right = self._insertL(arr, root.right,self.co,n)
+                root.left = self._insertL(arr, root.left,2*i+1,n)
+                root.right = self._insertL(arr, root.right,2*i+2,n)
             else:
                 self.co+=1
         return root
