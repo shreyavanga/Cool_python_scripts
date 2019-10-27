@@ -2,43 +2,30 @@ class node(object):
 
     def __init__(self, data):
         self.data = data
-        self.leftchild = None
-        self.rightchild = None
+        self.left = None
+        self.right = None
 
-class binary_search_tree(object):
+class BST(object):
 
     def __init__(self):
         self.root=None
+        self.co=0
 
-    def insert_node(self,data):
-        new_node=node.node(data)
-        if self.root==None:
-            self.root=new_node
-        else:
-            current_node=self.root
-            while True:
-                if data<current_node.data:
-                    if current_node.leftchild==None:
-                        current_node.leftchild=new_node
-                        break
-                    else:
-                        current_node=current_node.leftchild
-                elif data>current_node.data:
-                    if current_node.rightchild==None:
-                        current_node.rightchild=new_node
-                        break
-                    else:
-                        current_node=current_node.rightchild
     def _insertL(self,arr,root,i, n):
         if i < n:
             if arr[i] != -1 :
+                self.co = self.co + 1
+                print("i=",i,n)
                 temp = node(arr[i])
                 root = temp
-                root.leftchild = self._insertL(arr, root.leftchild,2 * i + 1, n)
-                root.rightchild = self._insertL(arr, root.rightchild,2 * i + 2, n)
+                root.left = self._insertL(arr, root.left,self.co,n)
+                root.right = self._insertL(arr, root.right,self.co,n)
+            else:
+                self.co+=1
+        return root
 
     def insertL(self,arr,i,n):
-        self._insertL(arr,self.root,i,n)
+        self.root=self._insertL(arr,self.root,i,n)
 
 
 
@@ -50,8 +37,36 @@ class binary_search_tree(object):
         else:
 
             print(root.data,end="--")
-            self.preorder(root.leftchild)
-            self.preorder(root.rightchild)
+            self.preorder(root.left)
+            self.preorder(root.right)
+    def printLeft(self,root):
+        if root:
+            if root.left:
+                print(root.data)
+                self.printLeft(root.left)
+            elif root.right:
+                print(root.data)
+                self.printLeft(root.right)
+    def printRight(self,root):
+        if root:
+            if root.right:
+                self.printRight(root.right)
+                print(root.data)
+            elif root.left:
+                self.printRight(root.left)
+                print(root.data)
+    def printLeaves(self,root):
+        if root:
+            self.printLeaves(root.left)
+            if not root.left and not root.right:
+                print (root.data)
+            self.printLeaves(root.right)
+
+    def boundary(self,root):
+        self.printLeft(root)
+        self.printLeaves(root)
+        self.printRight(root.right)
+
 
 n=input()
 v=n.split(" ")
@@ -59,8 +74,8 @@ arr=[]
 for i in v:
     temp=int(i)
     arr.append(temp)
-bst=binary_search_tree();
+bst=BST()
+print(len(arr))
 bst.insertL(arr,0,len(arr))
 print(bst.preorder(bst.root))
-
-
+print(bst.boundary(bst.root))
