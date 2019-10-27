@@ -32,7 +32,7 @@ if act<10 and hours>18:
     subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format(r'image/night_cold.jpg'), shell=True)
 su_cloud='cloud'
 su_sun='sunny'
-su_fog='fog'
+su_fog='Fog'
 su_rain='rain'
 su_thunder='thunder'
 su_storm='storm'
