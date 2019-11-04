@@ -13,6 +13,7 @@ def weather(city):
 
     soup = BeautifulSoup(the_page, "html.parser")
     content = soup.findAll('div', {"class": "three columns"})[0]
+    #print (content)
     temp = content.find('div', {'class': 'h2'}).text
     cond = str(content.findAll('p')[0].text)
     degree = temp.split(" ")[0].encode('ascii', 'ignore').decode()
@@ -31,17 +32,21 @@ if act<10 and hours<=18:
 if act<10 and hours>18:
     subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format(r'image/night_cold.jpg'), shell=True)
 su_cloud='cloud'
-su_sun='sunny'
+su_sun='Clear'
 su_fog='Fog'
 su_rain='rain'
 su_thunder='thunder'
 su_storm='storm'
+su_partly='sunny'
+su_haze='Haze'
 cl=cond.find(su_cloud)
 su=cond.find(su_sun)
 ra=cond.find(su_rain)
 fo=cond.find(su_fog)
 th=cond.find(su_thunder)
 st=cond.find(su_storm)
+pa=cond.find(su_partly)
+ha=cond.find(su_haze)
 if act>10 and hours<=18:
     if cl != -1:
         print("in line 47")
@@ -61,6 +66,15 @@ if act>10 and hours<=18:
     elif fo!=-1:
         print("in line 62")
         subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/fog.jpg"), shell=True)
+    elif pa != -1:
+        print("in line 47")
+        subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/day_clould.jpg"), shell=True)
+    elif ha != -1:
+        print("in line 47")
+        subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/day_clould.jpg"), shell=True)
+    else:
+        print("in line 47")
+        subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/day_clould.jpg"), shell=True)
 
 elif act>10 and hours>18:
     if cl != -1:
@@ -81,3 +95,12 @@ elif act>10 and hours>18:
     elif fo!=-1:
         print("in line 62")
         subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/night_cold.jpg"), shell=True)
+    elif ha != -1:
+        print("in line 47")
+        subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/night_cloud.jpg"), shell=True)
+    elif pa != -1:
+        print("in line 47")
+        subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/night_cloud.jpg"), shell=True)
+    else:
+        print("in line 47")
+        subprocess.Popen("DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.gnome.desktop.background picture-uri file://{0}".format("/home/ankush/cool_python_scripts/image/night_cloud.jpg"), shell=True)
