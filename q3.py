@@ -4,48 +4,9 @@ from bs4 import BeautifulSoup
 from playsound import playsound
 
 
-'''
-def matches():
-    url = "http://mapps.cricbuzz.com/cbzios/match/livematches"
-    try:
-        r = requests.get(url).json()
-    except Exception:
-        raise
-    crawled_data = r
-    matches = crawled_data['matches']
-    data = []
-
-    for match in matches:
-        #print ("hello")
-        #print(match)
-        data.append(match['match_id'])
-
-    return data
-
-
-def matchinfo(id_match):
-
-    url = "http://mapps.cricbuzz.com/cbzios/match/" + id_match
-    try:
-        r = requests.get(url).json()
-    except Exception:
-        raise
-    crawled_data = r
-
-    d = {}
-    d['id'] = id_match
-    d['series'] = crawled_data.get('series_name')
-    return d
-
-def calforeachmatch(match):
-    data = []
-    for i in match:
-        data.append(matchinfo(i))
-    return data
-'''
-def crawlforlivescore(id_match):
+def crawlforlivescore():
     while True:
-        url = "https://www.espncricinfo.com/series/8877/game/1194273/knights-vs-titans-11th-match-4-day-franchise-series-2019-20"
+        url = "https://www.espncricinfo.com/series/19309/game/1193497/afghanistan-vs-west-indies-1st-odi-west-indies-in-india-2019-20"
         try:
             r = requests.get(url)
         except Exception:
@@ -64,13 +25,13 @@ def crawlforlivescore(id_match):
         runs = run[-1];
         print(runs)
         if runs[-1] == "W":
-            print("it is a wicket")
+            print("wicket")
             playsound('wickets.mp3')
         elif runs[-1] == "6" :
-            print("it is a six")
+            print("six")
             playsound('sixes.mp3')
         elif runs[-1] == "4":
-            print("it is a four")
+            print("four")
             playsound('fours.mp3')
         elif runs[-1] == "1":
             print("one run")
@@ -79,11 +40,11 @@ def crawlforlivescore(id_match):
             #playsound('fours.mp3')
         time.sleep(5)
 
-def parselinks(links):
-    for i in links:
+# def parselinks(links):
+#     for i in links:
 
 
-def crawlforlivematches():
+'''def crawlforlivematches():
     url = "https://www.espncricinfo.com/scores"
     try:
         r = requests.get(url)
@@ -109,7 +70,9 @@ def crawlforlivematches():
         data = soup.find('span','data-reactid')
         print(data)
         print(i.text)
-    return 0
+    return 0'''
+
+
 
 
 def main():
@@ -123,15 +86,16 @@ def main():
 
     #do this for all matches
     #match_information = []
-    match_information = crawlforlivematches()
+    #links = findlivematches()
+    #match_information = crawlforlivematches()
     '''match_information = calforeachmatch(match)
     for i in match_information:
         print(i)
         # match_information = matchinfo(i)
         #print(match_information)'''
 
-    '''keep this off for sometime
-    crawlforlivescore(match[0])'''
+    '''keep this off for sometime'''
+    crawlforlivescore()
 
 
 
